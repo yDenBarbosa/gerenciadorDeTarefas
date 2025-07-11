@@ -28,29 +28,29 @@ function App() {
     },
   ]);
 
-  function onTaskClick(taskId){
-     const newTasks = tasks.map((task) => {
-       if (task.id === taskId) {
-         return {...task, isCompleted: !task.isCompleted};
-       } 
-       return task;
-     });
-     setTasks(newTasks);
-   }
-
-  function onDeleteTaskClick(taskId){
-    const newTasks = tasks.filter((task) => task.id !== taskId)
+  function onTaskClick(taskId) {
+    const newTasks = tasks.map((task) => {
+      if (task.id === taskId) {
+        return { ...task, isCompleted: !task.isCompleted };
+      }
+      return task;
+    });
     setTasks(newTasks);
   }
 
-  function onAddTaskSubmit (title, description) {
+  function onDeleteTaskClick(taskId) {
+    const newTasks = tasks.filter((task) => task.id !== taskId);
+    setTasks(newTasks);
+  }
+
+  function onAddTaskSubmit(title, description) {
     const newTask = {
       id: tasks.length + 1,
       title: title,
       description,
       isCompleted: false,
     };
-    setTasks([...tasks, newTask])
+    setTasks([...tasks, newTask]);
   }
 
   return (
@@ -59,8 +59,12 @@ function App() {
         <h1 className="text-3xl text-slate-100 font-bold text-center">
           Gerenciador de Tarefas
         </h1>
-        <AddTask onAddTaskSubmit={onAddTaskSubmit}/>
-        <Tasks tasks={tasks} onTaskClick={onTaskClick} onDeleteTaskClick={onDeleteTaskClick}/>
+        <AddTask onAddTaskSubmit={onAddTaskSubmit} />
+        <Tasks
+          tasks={tasks}
+          onTaskClick={onTaskClick}
+          onDeleteTaskClick={onDeleteTaskClick}
+        />
       </div>
     </div>
   );
