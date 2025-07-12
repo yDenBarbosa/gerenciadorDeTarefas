@@ -23,7 +23,8 @@ function App() {
         }
       );
       const data = await response.json();
-      setTasks(data);
+      // SE QUISER, VC PODE CHAMAR UMA API PARA PEGAR AS TAREFAS
+      // setTasks(data);
     };
     fetchTasks();
   }, []);
