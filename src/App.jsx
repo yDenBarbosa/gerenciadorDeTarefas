@@ -11,8 +11,22 @@ function App() {
   );
 
   useEffect(() => {
-    localStorage.setItem("tasks", JSON.stringify(tasks))
+    localStorage.setItem("tasks", JSON.stringify(tasks));
   }, [tasks]);
+
+  useEffect(() => {
+    const fetchTasks = async () => {
+      const response = await fetch(
+        "https://jsonplaceholder.typicode.com/todos?_limit=10",
+        {
+          method: "get",
+        }
+      );
+      const data = await response.json();
+      setTasks(data);
+    };
+    fetchTasks();
+  }, []);
 
   function onTaskClick(taskId) {
     const newTasks = tasks.map((task) => {
